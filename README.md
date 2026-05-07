@@ -18,7 +18,7 @@ Levantamos Jenkins con el Dockerfile de Grandle:
 
 ```bash
 # Construir la imagen
-docker build -t jenkins-gradle -f ./Ejercicios_Jenkins/gradle.Dockerfile .
+docker build -t jenkins-gradle -f ./Ejercicios_Jenkins_1/gradle.Dockerfile .
 
 # He tenido que cambiar el valor de GRADLE_SHA al utilizar la versión 7.6.6
 
@@ -31,11 +31,11 @@ docker run -d -p 8080:8080 -p 50000:50000 \
 
 Seguimos los primeros pasos y ya tenemos nuestro Jenkins disponible:
 
-![Jenkins_disponible](./Ejercicios_Jenkins/images/Jenkins_disponible.png)
+![Jenkins_disponible](./Ejercicios_Jenkins_1/images/Jenkins_disponible.png)
 
 Creamos nueva tarea de tipo `Pipeline`:
 
-![Nueva_tarea_pipeline](./Ejercicios_Jenkins/images/Nueva_tarea_pipeline.png)
+![Nueva_tarea_pipeline](./Ejercicios_Jenkins_1/images/Nueva_tarea_pipeline.png)
 
 En la configuración de la pipeline seteamos los siguientes campos:
 
@@ -45,13 +45,52 @@ En la configuración de la pipeline seteamos los siguientes campos:
   - Branch: */main
   - Script Path: Ejercicios_Jenkins_1/Jenkinsfile
 
+Le damos a ejecutar la pipeline, comprobamos que todo ha ido bien, que ha descargado el código, que lo ha compilado y ha corrido los tests:
 
+![Primera_build](./Ejercicios_Jenkins_1/images/Primera_build.png)
 
 ## 2. Modificar la pipeline para que utilice la imagen Docker de Gradle como build runner
 
 - Utilizar Docker in Docker a la hora de levantar Jenkins para realizar este ejercicio.
 - Como plugins deben estar instalados Docker y Docker Pipeline.
 - Usar la imagen de Docker gradle:6.6.1-jre14-openj9.
+
+**Solución**:
+
+Paramos y eliminamos el contenedor actual:
+
+```bash
+docker stop jenkins-gradle
+docker rm jenkins-gradle
+```
+
+Levantamos Jenkins con el socket de Docker montado (DinD):
+
+```bash
+docker run -d -p 8080:8080 -p 50000:50000 \
+  -v jenkins_home:/var/jenkins_home \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  --name jenkins-dind \
+  jenkins/jenkins
+```
+
+En la configuración de la pipeline seteamos los siguientes campos:
+
+  - Definition: Pipeline script from SCM (esto ya clona el repositorio)
+  - SCM: Git
+  - Repository URL: https://github.com/GeerDev/Entregables_CICD
+  - Branch: */main
+  - Script Path: Ejercicios_Jenkins_2/Jenkinsfile
+
+Vemos ahora en los logs del console output del build que efectivamente se está utilizando Docker:
+
+
+
+Comprobamos que todo que la build se ha ejecutado con éxito y que se han cumplido todos los pasos:
+
+
+
+Esto nos da más libertad ,por ejemplo, si el día de mañana tuvieramos 10 proyectos con versiones distintas de Gradle, necesitas 10 imágenes distintas de Jenkins en el caso de no utilizar Docker, ahora no necesitamos que la imagen de Jenkins contenga lo que queramos utilizar, directamente en el agent del Jenkinsfile ganamos la flexibilidad de poder utilizar lo que queramos.
 
 # Ejercicios GitHub Actions
 
