@@ -236,3 +236,32 @@ Crea una custom JavaScript Action que se ejecute cada vez que una issue tenga la
 ```bash
 curl https://favqs.com/api/qotd
 ```
+
+**Solución**:
+
+Se ha creado la custom JavaScript Action en [Ejercicios_GithubActions_4/motivate-action/](Ejercicios_GithubActions_4/motivate-action/) y el workflow en [.github/workflows/motivate-issue.yml](.github/workflows/motivate-issue.yml).
+
+La acción usa únicamente el módulo `https` de Node.js (sin dependencias externas), por lo que no requiere `npm install` ni compilación previa.
+
+Ficheros creados:
+- **`action.yml`**: declara la acción con runtime `node24` y apunta a `index.js`.
+- **`index.js`**: llama a `https://favqs.com/api/qotd`, parsea la respuesta y pinta la cita y el autor por consola.
+
+El workflow se dispara con el evento `issues: labeled` y ejecuta el job únicamente cuando la etiqueta añadida es exactamente `motivate`:
+
+```yaml
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  motivate:
+    if: github.event.label.name == 'motivate'
+```
+
+Los pasos que ejecuta son:
+1. **Checkout** del código (necesario para que GitHub pueda resolver la ruta local `./Ejercicios_GithubActions_4/motivate-action`).
+2. **Ejecución de la custom action**, que imprime la frase motivacional del día.
+
+Abrimos cualquier issue en el repositorio y añádimos la etiqueta `motivate`. El workflow se dispara automáticamente y nos muestra lo esperado:
+

@@ -1,0 +1,7 @@
+name: 'Motivational Quote'
+description: 'Fetches and prints a motivational quote when an issue is labeled with motivate'
+author: 'GeerDev'
+
+runs:
+  using: 'node24'
+  main: 'index.js'
