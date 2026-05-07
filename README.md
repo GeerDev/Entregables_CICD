@@ -225,6 +225,10 @@ Los pasos que ejecuta el workflow son:
 4. **Ejecución de los tests e2e** usando la `cypress-io/github-action@v6`, que instala las dependencias y ejecuta `cypress run` en modo headless desde `Ejercicios_GithubActions_3/hangman-e2e/e2e`.
 5. **`docker compose down`** con `if: always()` para limpiar los contenedores aunque los tests fallen.
 
+Comprabamos que el workflow ha sido exitoso y ha cumplido todos los pasos:
+
+![Workflow_e2e](./Ejercicios_GithubActions_3/Workflow_e2e.png)
+
 ## 4. Crea una custom JavaScript Action - OPCIONAL
 
 Crea una custom JavaScript Action que se ejecute cada vez que una issue tenga la etiqueta motivate. La acción deberá pintar por consola un mensaje motivacional. Puedes usar esta [API](https://favqs.com/api) gratuita. Puedes encontrar más información de como crear una custom JS action en [este enlace](https://docs.github.com/es/actions/tutorials/create-actions/create-a-javascript-action).
