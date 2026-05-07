@@ -1,0 +1,28 @@
+pipeline {
+  agent any
+
+  stages {
+    stage('Checkout') {
+      steps {
+        git branch: 'master',
+            url: 'https://github.com/Lemoncode/bootcamp-devops-lemoncode.git'
+      }
+    }
+
+    stage('Compile') {
+      steps {
+        dir('03-cd/exercises/jenkins-resources/calculator') {
+          sh './gradlew compileJava'
+        }
+      }
+    }
+
+    stage('Unit Tests') {
+      steps {
+        dir('03-cd/exercises/jenkins-resources/calculator') {
+          sh './gradlew test'
+        }
+      }
+    }
+  }
+}

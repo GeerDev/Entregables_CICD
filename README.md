@@ -12,6 +12,41 @@ En el directorio raíz de este [código fuente](https://github.com/Lemoncode/boo
 
 Para ejecutar Jenkins en local y tener las dependencias necesarias disponibles podemos construir una imagen a partir de este [Dockerfile](https://github.com/Lemoncode/bootcamp-devops-lemoncode/blob/master/03-cd/exercises/jenkins-resources/gradle.Dockerfile)
 
+**Solución**:
+
+Levantamos Jenkins con el Dockerfile de Grandle:
+
+```bash
+# Construir la imagen
+docker build -t jenkins-gradle -f ./Ejercicios_Jenkins/gradle.Dockerfile .
+
+# He tenido que cambiar el valor de GRADLE_SHA al utilizar la versión 7.6.6
+
+# Levantar el contenedor
+docker run -d -p 8080:8080 -p 50000:50000 \
+  -v jenkins_home:/var/jenkins_home \
+  --name jenkins-gradle \
+  jenkins-gradle
+```
+
+Seguimos los primeros pasos y ya tenemos nuestro Jenkins disponible:
+
+![Jenkins_disponible](./Ejercicios_Jenkins/images/Jenkins_disponible.png)
+
+Creamos nueva tarea de tipo `Pipeline`:
+
+![Nueva_tarea_pipeline](./Ejercicios_Jenkins/images/Nueva_tarea_pipeline.png)
+
+En la configuración de la pipeline seteamos los siguientes campos:
+
+  - Definition: Pipeline script from SCM
+  - SCM: Git
+  - Repository URL: https://github.com/GeerDev/Entregables_CICD
+  - Branch: */main
+  - Script Path: Ejercicios_Jenkins/Jenkinsfile
+
+
+
 ## 2. Modificar la pipeline para que utilice la imagen Docker de Gradle como build runner
 
 - Utilizar Docker in Docker a la hora de levantar Jenkins para realizar este ejercicio.
