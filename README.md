@@ -156,6 +156,35 @@ Crea un nuevo workflow que se dispare manualmente y haga lo siguiente:
 - Crear una nueva imagen de Docker
 - Publicar dicha imagen en el [container registry de GitHub](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)
 
+**Solución**:
+
+Se ha creado el workflow en [.github/workflows/hangman-front-cd.yml](.github/workflows/hangman-front-cd.yml).
+
+El workflow se dispara **manualmente** desde la pestaña Actions de GitHub (`workflow_dispatch`). No requiere secrets adicionales: utiliza el `GITHUB_TOKEN` que GitHub inyecta automáticamente en cada ejecución, y el `Dockerfile` ya existente en `Ejercicios_GithubActions_2/hangman-front/`.
+
+Los pasos que ejecuta son:
+1. **Checkout** del código.
+2. **Login en `ghcr.io`** usando el actor y el `GITHUB_TOKEN` automático.
+3. **Generación de tags** con `docker/metadata-action`: crea la tag `latest` y una tag `sha-<hash>` para trazabilidad.
+4. **Build y push** de la imagen Docker usando el `Dockerfile` del proyecto. La imagen se publica en GitHub Container Registry.
+
+La imagen queda disponible en:
+```
+ghcr.io/GeerDev/hangman-front:latest
+```
+
+Para disparar el workflow manualmente:
+1. Ve a tu repositorio en GitHub.
+2. Haz clic en la pestaña **Actions**.
+3. Selecciona el workflow **Hangman Front - CD**.
+4. Pulsa **Run workflow**
+
+Para acceder a la imagen publicada desde el navegador:
+```
+https://github.com/GeerDev?tab=packages
+```
+O directamente desde la página del repositorio en la sección **Packages** (columna derecha).
+
 ## 3. Crea un workflow que ejecute tests e2e - OPCIONAL
 
 Crea un workflow que se lance de la manera que elijas y ejecute los tests e2e que encontrarás en [este enlace](https://github.com/Lemoncode/bootcamp-devops-lemoncode/tree/master/03-cd/03-github-actions/.start-code/hangman-e2e/e2e). Puedes usar [Docker Compose](https://docs.docker.com/compose/gettingstarted/) o [Cypress action](https://github.com/cypress-io/github-action) para ejecutar los tests.
