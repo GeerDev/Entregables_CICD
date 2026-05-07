@@ -146,7 +146,8 @@ git push origin test/ci-workflow
 
 Desde la interfaz de Github creamos la PR y comprobamos el workflow:
 
-
+![Trigger_primer_workflow](./Ejercicios_GithubActions_1/Trigger_primer_workflow.png)
+![Estado_primer_workflow](./Ejercicios_GithubActions_1/Estado_primer_workflow.png)
 
 ## 2. Crea un workflow CD para el proyecto de frontend - OBLIGATORIO
 
