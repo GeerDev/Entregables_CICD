@@ -86,6 +86,12 @@ He instalado los plugins de `Docker` y `Docker Pipeline` para este ejercicio.
 
 ![Pipelines_docker](./Ejercicios_Jenkins_2/images/Pipelines_docker.png)
 
+Además he instalado algunos paquetes y he cambiado los permisos para el docker.sock (esto es porque es una práctica pero jamás lo haria en un ámbiente productivo):
+
+```bash
+
+```
+
 Vemos ahora en los logs del console output del build que efectivamente se está utilizando Docker:
 
 
