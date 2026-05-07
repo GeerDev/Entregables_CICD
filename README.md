@@ -208,6 +208,23 @@ cd hangman-e2e/e2e
 npm run open
 ```
 
+**Solución**:
+
+Se ha creado el workflow en [.github/workflows/hangman-e2e.yml](.github/workflows/hangman-e2e.yml) y el fichero [Ejercicios_GithubActions_3/docker-compose.yaml](Ejercicios_GithubActions_3/docker-compose.yaml).
+
+El workflow se puede lanzar **manualmente** (`workflow_dispatch`) o automáticamente cuando hay cambios bajo `Ejercicios_GithubActions_3/**`.
+
+El `docker-compose.yaml` define los dos servicios:
+- **hangman-api**: construye la imagen desde `./hangman-api` y la expone en el puerto `3001`.
+- **hangman-front**: construye la imagen desde `./hangman-front`, expone el puerto `8080` y establece `API_URL=http://localhost:3001`. Depende de `hangman-api` para que Docker gestione el orden de arranque.
+
+Los pasos que ejecuta el workflow son:
+1. **Checkout** del código.
+2. **`docker compose up -d --build`**: construye ambas imágenes y arranca los contenedores en segundo plano con un solo comando.
+3. **Espera a que los servicios estén listos** usando `wait-on` sobre los puertos TCP antes de lanzar los tests.
+4. **Ejecución de los tests e2e** usando la `cypress-io/github-action@v6`, que instala las dependencias y ejecuta `cypress run` en modo headless desde `Ejercicios_GithubActions_3/hangman-e2e/e2e`.
+5. **`docker compose down`** con `if: always()` para limpiar los contenedores aunque los tests fallen.
+
 ## 4. Crea una custom JavaScript Action - OPCIONAL
 
 Crea una custom JavaScript Action que se ejecute cada vez que una issue tenga la etiqueta motivate. La acción deberá pintar por consola un mensaje motivacional. Puedes usar esta [API](https://favqs.com/api) gratuita. Puedes encontrar más información de como crear una custom JS action en [este enlace](https://docs.github.com/es/actions/tutorials/create-actions/create-a-javascript-action).

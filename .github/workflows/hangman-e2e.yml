@@ -1,0 +1,32 @@
+name: Hangman - E2E Tests
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "Ejercicios_GithubActions_3/**"
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Start services
+        working-directory: Ejercicios_GithubActions_3
+        run: docker compose up -d --build
+
+      - name: Wait for services to be ready
+        run: npx --yes wait-on tcp:localhost:3001 tcp:localhost:8080 --timeout 60000
+
+      - name: Run E2E tests
+        uses: cypress-io/github-action@v6
+        with:
+          working-directory: Ejercicios_GithubActions_3/hangman-e2e/e2e
+
+      - name: Stop services
+        if: always()
+        working-directory: Ejercicios_GithubActions_3
+        run: docker compose down

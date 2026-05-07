@@ -1,0 +1,17 @@
+services:
+  hangman-api:
+    build: ./hangman-api
+    ports:
+      - "3001:3000"
+
+  hangman-front:
+    build:
+      context: ./hangman-front
+      args:
+        API_URL: "{{API_URL}}"
+    ports:
+      - "8080:8080"
+    environment:
+      - API_URL=http://localhost:3001
+    depends_on:
+      - hangman-api
