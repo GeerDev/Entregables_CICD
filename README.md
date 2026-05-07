@@ -121,6 +121,19 @@ Después crea un nuevo workflow que se dispare cuando haya cambios en el proyect
 - Build del proyecto de front
 - Ejecutar los unit tests
 
+**Solución**:
+
+Se ha creado el workflow en [.github/workflows/hangman-front-ci.yml](.github/workflows/hangman-front-ci.yml).
+
+El workflow se dispara con `pull_request` filtrando únicamente los cambios bajo `Ejercicios_GithubActions_1/hangman-front/**`, lo que garantiza que **ambas condiciones** se cumplan a la vez (nueva PR + cambios en el proyecto).
+
+Los pasos que ejecuta son:
+1. **Checkout** del código.
+2. **Setup Node.js 24** con caché de dependencias.
+3. **npm ci** para instalar dependencias de forma limpia y reproducible.
+4. **npm run build** para construir el proyecto.
+5. **npm test** para ejecutar los unit tests.
+
 ## 2. Crea un workflow CD para el proyecto de frontend - OBLIGATORIO
 
 Crea un nuevo workflow que se dispare manualmente y haga lo siguiente:
