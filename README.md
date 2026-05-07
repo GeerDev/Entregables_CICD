@@ -39,11 +39,11 @@ Creamos nueva tarea de tipo `Pipeline`:
 
 En la configuración de la pipeline seteamos los siguientes campos:
 
-  - Definition: Pipeline script from SCM
+  - Definition: Pipeline script from SCM (esto ya clona el repositorio)
   - SCM: Git
   - Repository URL: https://github.com/GeerDev/Entregables_CICD
   - Branch: */main
-  - Script Path: Ejercicios_Jenkins/Jenkinsfile
+  - Script Path: Ejercicios_Jenkins_1/Jenkinsfile
 
 
 
