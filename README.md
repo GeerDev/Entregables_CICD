@@ -265,3 +265,4 @@ Los pasos que ejecuta son:
 
 Abrimos cualquier issue en el repositorio y añádimos la etiqueta `motivate`. El workflow se dispara automáticamente y nos muestra lo esperado:
 
+![Motivate_workflow](./Ejercicios_GithubActions_4/Motivate_workflow.png)
