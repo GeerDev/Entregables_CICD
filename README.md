@@ -89,18 +89,26 @@ He instalado los plugins de `Docker` y `Docker Pipeline` para este ejercicio.
 Además he instalado algunos paquetes y he cambiado los permisos para el docker.sock (esto es porque es una práctica pero jamás lo haria en un ámbiente productivo):
 
 ```bash
-
+docker exec -u root jenkins-dind apt-get update
+docker exec -u root jenkins-dind apt-get install -y docker.io
+docker exec -u root jenkins-dind chmod 666 /var/run/docker.sock
 ```
 
 Vemos ahora en los logs del console output del build que efectivamente se está utilizando Docker:
 
+![Docker_en_logs](./Ejercicios_Jenkins_2/images/Docker_en_logs.png)
 
+Además comprobamos que el pipeline esta utilizando esa versión de grandle para la compilación y los tests:
+
+![Grandle_utilizando_version_docker](./Ejercicios_Jenkins_2/images/Grandle_utilizando_version_docker.png)
 
 Comprobamos que todo que la build se ha ejecutado con éxito y que se han cumplido todos los pasos:
 
+![Segunda_build_exitosa](./Ejercicios_Jenkins_2/images/Segunda_build_exitosa.png)
 
+Si el día de mañana tuvieramos 10 proyectos con versiones distintas de Gradle, necesitas 10 imágenes distintas de Jenkins en el caso de no utilizar Docker.
 
-Esto nos da más libertad ,por ejemplo, si el día de mañana tuvieramos 10 proyectos con versiones distintas de Gradle, necesitas 10 imágenes distintas de Jenkins en el caso de no utilizar Docker, ahora no necesitamos que la imagen de Jenkins contenga lo que queramos utilizar, directamente en el agent del Jenkinsfile ganamos la flexibilidad de poder utilizar lo que queramos.
+Ahora directamente en el agent del Jenkinsfile **ganamos la flexibilidad** de poder utilizar cualquier imagen que se pueda cargar con Docker.
 
 # Ejercicios GitHub Actions
 
