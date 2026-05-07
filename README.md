@@ -179,11 +179,15 @@ Para disparar el workflow manualmente:
 3. Selecciona el workflow **Hangman Front - CD**.
 4. Pulsa **Run workflow**
 
+![Run_hangman-front-cd](./Ejercicios_GithubActions_2/Run_hangman-front-cd.png)
+
 Para acceder a la imagen publicada desde el navegador:
 ```
 https://github.com/GeerDev?tab=packages
 ```
 O directamente desde la página del repositorio en la sección **Packages** (columna derecha).
+
+![Paquete_publicado](./Ejercicios_GithubActions_2/Paquete_publicado.png)
 
 ## 3. Crea un workflow que ejecute tests e2e - OPCIONAL
 
