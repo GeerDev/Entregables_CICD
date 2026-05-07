@@ -144,7 +144,7 @@ git commit -m "test: trigger CI workflow"
 git push origin test/ci-workflow
 ```
 
-Comprobamos el workflow:
+Desde la interfaz de Github creamos la PR y comprobamos el workflow:
 
 
 
