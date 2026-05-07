@@ -134,6 +134,20 @@ Los pasos que ejecuta son:
 4. **npm run build** para construir el proyecto.
 5. **npm test** para ejecutar los unit tests.
 
+Para probar si está funcionando correctamente:
+
+```bash
+git checkout -b test/ci-workflow
+# Hacemos cambios en cualquier fichero de hangman-front
+git add .
+git commit -m "test: trigger CI workflow"
+git push origin test/ci-workflow
+```
+
+Comprobamos el workflow:
+
+
+
 ## 2. Crea un workflow CD para el proyecto de frontend - OBLIGATORIO
 
 Crea un nuevo workflow que se dispare manualmente y haga lo siguiente:
