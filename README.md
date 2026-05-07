@@ -82,6 +82,10 @@ En la configuración de la pipeline seteamos los siguientes campos:
   - Branch: */main
   - Script Path: Ejercicios_Jenkins_2/Jenkinsfile
 
+He instalado los plugins de `Docker` y `Docker Pipeline` para este ejercicio.
+
+![Pipelines_docker](./Ejercicios_Jenkins_2/images/Pipelines_docker.png)
+
 Vemos ahora en los logs del console output del build que efectivamente se está utilizando Docker:
 
 
