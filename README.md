@@ -266,3 +266,22 @@ Los pasos que ejecuta son:
 Abrimos cualquier issue en el repositorio y añádimos la etiqueta `motivate`. El workflow se dispara automáticamente y nos muestra lo esperado:
 
 ![Motivate_workflow](./Ejercicios_GithubActions_4/Motivate_workflow.png)
+
+# Corrección
+
+## Jenkins
+Ejercicio 1: todo bien.
+Ejercicio 2: todo bien.
+Me gusta que hayas explicado como arrancar el entorno en cada caso antes de empezar con el ejercicio como tal.
+
+## GitHub Actions
+Antes de entrar a evaluar los ejercicios, comentar que no lo veo mucho sentido que el código fuente lo tengas repetido 3 veces. Lo ideal hubiera sido tener el código fuente en el directorio raíz, de forma similar a como hicimos en las clases.
+
+Común a todos los ejercicios: intenta usar la última versión disponible de todas las actions. Por ejemplo, actions/checkout iba ya por la versión 6 cuando dimos las clases y estás usando la versión 4. Prácticamente todas las versiones de las actions que usas están desactualizadas y tienes warnings en los logs de las actions por este motivo.
+Ejercicio 1: todo bien.
+Ejercicio 2: todo bien. He echado de menos la action de Buildx (docker/setup-buildx-action).
+Ejercicio 3: todo bien.
+Ejercicio 4: todo bien.
+Me parece genial que hayas realizado todos los ejercicios propuestos, pocos alumnos lo hacen.
+
+Muy buena entrega, una vez más.
